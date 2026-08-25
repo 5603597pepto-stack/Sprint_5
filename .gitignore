@@ -1,0 +1,25 @@
+# Виртуальное окружение
+venv/
+.venv/
+env/
+
+# Кэш Python
+__pycache__/
+*.pyc
+.pytest_cache/
+
+# Отчеты тестов и логи
+reports/
+logs/
+*.log
+
+# Переменные окружения
+.env
+
+
+# Настройки VS Code/PyCharm
+.vscode/
+.idea/
+ 
+# игнорировать все файлы с расширением .doc
+*.doc 
