@@ -11,6 +11,7 @@ from locators import RegisterPageLocators
 
 class TestRegistration:
 
+    # Проверка успешной регистрации нового пользователя.
     def test_successful_registration(self, driver, base_url, user_data):
 
         driver.get(f"{base_url}/register")
@@ -25,6 +26,7 @@ class TestRegistration:
 
         assert "/login" in driver.current_url
 
+    # Проверка ошибки при регистрации с некорректным (слишком коротким) паролем.
     def test_registration_invalid_password_error(self, driver, base_url, user_data):
       
         driver.get(f"{base_url}/register")
