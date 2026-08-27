@@ -45,3 +45,6 @@ class MainPageLocators:
     BUN_SECTION = (By.XPATH, "//span[text()='Булки']/..")  # Контейнер раздела «Булки»
     SAUCE_SECTION = (By.XPATH, "//span[text()='Соусы']/..")  # Контейнер раздела «Соусы»
     FILLING_SECTION = (By.XPATH, "//span[text()='Начинки']/..")  # Контейнер раздела «Начинки»
+
+    INGREDIENTS_TITLE = (By.XPATH, "//h1[text()='Соберите бургер']")  # Заголовок страницы конструктора
+    
