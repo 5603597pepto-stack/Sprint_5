@@ -7,13 +7,14 @@ from selenium.webdriver.support import expected_conditions as EC
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from locators import MainPageLocators
+from constants import BASE_URL
 
 
 class TestConstructorTabs:
 
     # Переход к разделу "Булки"
-    def test_switch_to_bun_tab(self, driver, base_url):
-        driver.get(base_url)
+    def test_switch_to_bun_tab(self, driver):
+        driver.get(BASE_URL)
         wait = WebDriverWait(driver, 10)
 
         wait.until(EC.presence_of_element_located(MainPageLocators.INGREDIENTS_TITLE))
@@ -30,8 +31,8 @@ class TestConstructorTabs:
 
 
     # Переход к разделу "Соусы"
-    def test_switch_to_sauce_tab(self, driver, base_url):
-        driver.get(base_url)
+    def test_switch_to_sauce_tab(self, driver):
+        driver.get(BASE_URL)
         wait = WebDriverWait(driver, 10)
     
         wait.until(EC.presence_of_element_located(MainPageLocators.INGREDIENTS_TITLE))
@@ -43,8 +44,8 @@ class TestConstructorTabs:
         assert sauce_section.is_displayed()
 
     # Переход к разделу "Начинки"
-    def test_switch_to_filling_tab(self, driver, base_url):
-        driver.get(base_url)
+    def test_switch_to_filling_tab(self, driver):
+        driver.get(BASE_URL)
         wait = WebDriverWait(driver, 10)
     
         wait.until(EC.presence_of_element_located(MainPageLocators.INGREDIENTS_TITLE))

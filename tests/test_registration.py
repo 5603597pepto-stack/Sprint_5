@@ -7,14 +7,15 @@ from selenium.webdriver.support import expected_conditions as EC
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from locators import RegisterPageLocators
+from constants import REGISTER_URL, LOGIN_URL
 
 
 class TestRegistration:
 
     # Проверка успешной регистрации нового пользователя.
-    def test_successful_registration(self, driver, base_url, user_data):
+    def test_successful_registration(self, driver, user_data):
 
-        driver.get(f"{base_url}/register")
+        driver.get(REGISTER_URL)
         WebDriverWait(driver, 10).until(EC.presence_of_element_located(RegisterPageLocators.REGISTER_NAME_INPUT))
 
         driver.find_element(*RegisterPageLocators.REGISTER_NAME_INPUT).send_keys(user_data["name"])
@@ -22,14 +23,14 @@ class TestRegistration:
         driver.find_element(*RegisterPageLocators.PASSWORD_INPUT).send_keys(user_data["password"])
         driver.find_element(*RegisterPageLocators.REGISTER_BUTTON).click()
 
-        WebDriverWait(driver, 10).until(EC.url_contains("/login"))
+        WebDriverWait(driver, 10).until(EC.url_contains(LOGIN_URL))
 
-        assert "/login" in driver.current_url
+        assert LOGIN_URL in driver.current_url
 
     # Проверка ошибки при регистрации с некорректным (слишком коротким) паролем.
-    def test_registration_invalid_password_error(self, driver, base_url, user_data):
+    def test_registration_invalid_password_error(self, driver, user_data):
       
-        driver.get(f"{base_url}/register")
+        driver.get(REGISTER_URL)
         WebDriverWait(driver, 10).until(EC.presence_of_element_located(RegisterPageLocators.REGISTER_NAME_INPUT))
 
         invalid_password = "123"  # некорректный пароль — короче 6 символов
@@ -43,3 +44,4 @@ class TestRegistration:
         error_message = driver.find_element(*RegisterPageLocators.PASSWORD_ERROR).text
 
         assert error_message == 'Некорректный пароль'
+        
