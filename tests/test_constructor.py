@@ -15,43 +15,43 @@ class TestConstructorTabs:
     # Переход к разделу "Булки"
     def test_switch_to_bun_tab(self, driver):
         driver.get(BASE_URL)
-        wait = WebDriverWait(driver, 10)
 
+        wait = WebDriverWait(driver, 10)
         wait.until(EC.presence_of_element_located(MainPageLocators.INGREDIENTS_TITLE))
 
         # сначала переключаемся на «Начинки», чтобы затем проверить обратный переход на «Булки»
-        filling_tab = wait.until(EC.element_to_be_clickable(MainPageLocators.FILLING_TAB))
-        filling_tab.click()
+        driver.find_element(*MainPageLocators.FILLING_TAB).click()
 
-        bun_tab = wait.until(EC.element_to_be_clickable(MainPageLocators.BUN_TAB))
+        bun_tab = driver.find_element(*MainPageLocators.BUN_TAB)
         bun_tab.click()
 
-        bun_section = driver.find_element(*MainPageLocators.BUN_SECTION)
-        assert bun_section.is_displayed()
+        assert wait.until(
+        lambda d: "tab_type_current" in d.find_element(*MainPageLocators.BUN_SECTION).get_attribute("class"))
 
 
     # Переход к разделу "Соусы"
     def test_switch_to_sauce_tab(self, driver):
         driver.get(BASE_URL)
+
         wait = WebDriverWait(driver, 10)
-    
         wait.until(EC.presence_of_element_located(MainPageLocators.INGREDIENTS_TITLE))
     
-        sauce_tab = wait.until(EC.element_to_be_clickable(MainPageLocators.SAUCE_TAB))
+        sauce_tab = driver.find_element(*MainPageLocators.SAUCE_TAB)
         sauce_tab.click()
     
-        sauce_section = driver.find_element(*MainPageLocators.SAUCE_SECTION)
-        assert sauce_section.is_displayed()
+        assert wait.until(
+        lambda d: "tab_type_current" in d.find_element(*MainPageLocators.SAUCE_SECTION).get_attribute("class"))
 
     # Переход к разделу "Начинки"
     def test_switch_to_filling_tab(self, driver):
         driver.get(BASE_URL)
+
         wait = WebDriverWait(driver, 10)
-    
         wait.until(EC.presence_of_element_located(MainPageLocators.INGREDIENTS_TITLE))
     
         filling_tab = wait.until(EC.element_to_be_clickable(MainPageLocators.FILLING_TAB))
         filling_tab.click()
+
+        assert wait.until(
+        lambda d: "tab_type_current" in d.find_element(*MainPageLocators.FILLING_SECTION).get_attribute("class"))
     
-        filling_section = driver.find_element(*MainPageLocators.FILLING_SECTION)
-        assert filling_section.is_displayed()

@@ -20,8 +20,7 @@ class TestLogin:
         login_button = wait.until(EC.element_to_be_clickable(MainPageLocators.LOGIN_BUTTON_MAIN))
         login_button.click()
 
-        wait.until(EC.url_contains(LOGIN_ENDPOINT))
-        assert LOGIN_ENDPOINT in driver.current_url
+        assert wait.until(lambda d: LOGIN_ENDPOINT in d.current_url)
 
     # вход через кнопку «Личный кабинет»
     def test_login_from_account_link(self, driver):
@@ -31,8 +30,8 @@ class TestLogin:
         account_link = wait.until(EC.element_to_be_clickable(MainPageLocators.ACCOUNT_LINK))
         account_link.click()
 
-        wait.until(EC.url_contains(LOGIN_ENDPOINT))
-        assert LOGIN_ENDPOINT in driver.current_url
+        assert wait.until(lambda d: LOGIN_ENDPOINT in d.current_url)
+
 
     # вход через кнопку в форме регистрации
     def test_login_from_login_link(self, driver):
@@ -42,8 +41,7 @@ class TestLogin:
         login_link = wait.until(EC.element_to_be_clickable(RegisterPageLocators.LOGIN_LINK))
         login_link.click()
             
-        wait.until(EC.url_contains(LOGIN_ENDPOINT))
-        assert LOGIN_ENDPOINT in driver.current_url
+        assert wait.until(lambda d: LOGIN_ENDPOINT in d.current_url)
 
     # вход через кнопку в форме восстановления пароля
     def test_login_from_forgot_password_form(self, driver):
@@ -53,5 +51,4 @@ class TestLogin:
         login_link = wait.until(EC.element_to_be_clickable(LoginPageLocators.ACCOUNT_LINK_IN_FORGOT_PASSWORD))
         login_link.click()
     
-        wait.until(EC.url_contains(LOGIN_ENDPOINT))
-        assert LOGIN_ENDPOINT in driver.current_url
+        assert wait.until(lambda d: LOGIN_ENDPOINT in d.current_url)
